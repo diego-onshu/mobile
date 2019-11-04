@@ -8,15 +8,17 @@ import br.com.etec.aula5.model.Usuario
 
 @Dao
 interface UsuarioDao{
-    @Query("select * from"+Usuario.TABLE_NAME)
-    fun getAll():List<Usuario>
+    @Query("select * from ${Usuario.TABLE_NAME}")
+    fun select():List<Usuario>
+    @Query("select * from ${Usuario.TABLE_NAME} where id = :id")
+    fun select(id:Long):Usuario
+    @Query("select * from ${Usuario.TABLE_NAME} where email = :email and senha = :password")
+    fun select(email:String, password:String):Usuario
 
     @Insert(onConflict = REPLACE)
-    fun insert(usuario: Usuario):Usuario
+    fun insert(usuario: Usuario):Long
 
-    
-    fun delete(id: Long)
-
-    fun get(id: Long):Usuario
+    @Query ("delete from ${Usuario.TABLE_NAME} where id = :id")
+    fun delete(id: Long):Int
 
 }
