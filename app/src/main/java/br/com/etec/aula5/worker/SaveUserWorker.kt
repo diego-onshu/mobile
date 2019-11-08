@@ -8,7 +8,7 @@ import br.com.etec.aula5.data.BibliotecaDatabase
 import br.com.etec.aula5.model.Usuario
 import java.lang.Exception
 
-class SaverUserWorker(var ctx:Context, params:WorkerParameters):Worker(ctx,params){
+class SaveUserWorker(var ctx:Context, params:WorkerParameters):Worker(ctx,params){
     override fun doWork(): Result {
         return try {
             var usr =Usuario(null, inputData.getString("nome")!!,
